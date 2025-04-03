@@ -19,5 +19,6 @@ die("connection error: ". pg_last_error());
 else {//connection true
     echo "success connection";
 }
+pg_clouse();//CIERRA LA BASE DE DATOS Y SOLO $CONN ES LA LLAVE MAESTRA
 
 ?>
