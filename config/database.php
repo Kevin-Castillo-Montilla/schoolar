@@ -24,8 +24,8 @@ if (!$conn){//conecion error
 die("connection error: ". pg_last_error());
 }
 else {//connection true
-    echo "success connection";
+ ///   echo "success connection";
 }
-pg_close();//CIERRA LA BASE DE DATOS Y SOLO $CONN ES LA LLAVE MAESTRA
+//pg_close();//CIERRA LA BASE DE DATOS Y SOLO $CONN ES LA LLAVE MAESTRA
 
 ?>

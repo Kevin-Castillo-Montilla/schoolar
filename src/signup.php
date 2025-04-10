@@ -7,7 +7,7 @@ $email  = $_POST['e_mail'];
 $passwd = $_POST['passw'];
 //encriptar 
 //$enc_pass = md5($passwd);
-$enc_pass = sha1($passwd);
+$enc_pass = sha1($passwd); 
 //valido
 $sql_valid_mail ="
 SELECT
@@ -32,7 +32,9 @@ if ($row['total']>0){
 
 $res = pg_query($conn, $sql);
 if ($res){
-echo"User has been created succesful";
+  // echo"User has been created succesful";
+  echo"<script>alert('user has been crated. Go to login!')";
+header('refres:0; url = http://localhost/schoolar/src/signin.html');
 }else{
 echo"Error";
       } 
