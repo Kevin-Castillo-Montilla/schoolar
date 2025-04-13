@@ -1,43 +1,53 @@
 <?php
-//lamar el archivo
-include ('../config/database.php');
-$fname  = $_POST['f_name'];
-$lname  = $_POST['l_name'];
-$email  = $_POST['e_mail'];
+// Incluir archivo de configuración de base de datos
+include('../config/database.php');
+
+// Inicialización de variables
+$fname = $_POST['f_name'];
+$lname = $_POST['l_name'];
+$email = $_POST['e_mail'];
 $passwd = $_POST['passw'];
-//encriptar 
-//$enc_pass = md5($passwd);
-$enc_pass = sha1($passwd); 
-//valido
-$sql_valid_mail ="
-SELECT
-  COUNT(email) as total
-FROM
-  users
-WHERE
-email = '$email'
-LIMIT 1  
-";
+$error = "";
 
-$res = pg_query($conn, $sql_valid_mail);
+// Validar si los campos no están vacíos
+if (empty($fname) || empty($lname) || empty($email) || empty($passwd)) {
+    $error = "Todos los campos son obligatorios.";
+} else {
+    // Validar formato de correo electrónico
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "El correo electrónico no es válido.";
+    } else {
+        // Prevenir inyecciones SQL con consultas preparadas
+        $stmt = pg_prepare($conn, "check_email", "SELECT COUNT(email) as total FROM users WHERE email = $1 LIMIT 1");
+        $result = pg_execute($conn, "check_email", array($email));
 
-if ($res){
-$row = pg_fetch_assoc($res);
-if ($row['total']>0){
-    echo "Email already exist";
-}else{  
-    $sql = "INSERT INTO users (firstname,lastname,email,password)
-    VALUES('$fname','$lname','$email','$enc_pass')
-";
+        if ($result) {
+            $row = pg_fetch_assoc($result);
+            if ($row['total'] > 0) {
+                $error = "El correo electrónico ya está registrado.";
+            } else {
+                // Encriptar la contraseña con password_hash
+                $enc_pass = password_hash($passwd, PASSWORD_BCRYPT);
 
-$res = pg_query($conn, $sql);
-if ($res){
-  // echo"User has been created succesful";
-  echo"<script>alert('user has been crated. Go to login!')";
-header('refres:0; url = http://localhost/schoolar/src/signin.html');
-}else{
-echo"Error";
-      } 
-    }       
-  }
+                // Preparar la consulta de inserción
+                $stmt = pg_prepare($conn, "insert_user", "INSERT INTO users (firstname, lastname, email, password) VALUES ($1, $2, $3, $4)");
+                $res = pg_execute($conn, "insert_user", array($fname, $lname, $email, $enc_pass));
+
+                if ($res) {
+                    // Redirigir a la página de inicio de sesión
+                    echo "<script>alert('Usuario creado exitosamente. Redirigiendo al inicio de sesión.'); window.location.href='signin.html';</script>";
+                } else {
+                    $error = "Error al registrar el usuario. Intenta más tarde.";
+                }
+            }
+        } else {
+            $error = "Error en la consulta de base de datos.";
+        }
+    }
+}
+
+// Si hay un error, mostrarlo
+if ($error) {
+    echo "<script>alert('$error'); window.location.href='signup.html';</script>";
+}
 ?>

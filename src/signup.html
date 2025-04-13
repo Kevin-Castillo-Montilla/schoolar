@@ -1,24 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="img/png" href="src/icons/bolsa-para-la-escuela.Shool.png">
-    <title>Schoolar - Sign up</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registrar cuenta - Schoolar</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="icon" type="image/png" href="../src/icons/bolsa-para-la-escuela.Shool.png" />
 </head>
-<body>
-    <form name="register - form" action="signup.php" method="post">
-    <center><h1>Register form</h1></center><br><br>
-    
-    <table border="0" align="center">
-        <tr><td><input type="text" name="f_name" placeholder="your first name" required></td></tr>
-        <tr><td><input type="text" name="l_name" placeholder="your last name" required></td></tr>
-        <tr><td><input type="email" name="e_mail" placeholder="juan@gmai.com" required></td></tr>
-        <tr><td><input type="password" name="passw" placeholder="*********" required></td></tr>
-        <br><br>
-        <tr><td align="center"><button>Register new User</button></td></tr>
-    </table>
-</form>
+<body class="fondo-signup">
+
+  <!-- Botón de Volver en la parte superior izquierda -->
+  <a href="../index.html" class="back-button">Volver al inicio</a>
+
+  <main>
+    <div class="form-container">
+      <img src="icons/nuevo-empleado.png" alt="User Icon" width="60" class="form-logo" />
+      <h2>Crear una cuenta</h2>
+      <form name="register-form" action="signup.php" method="post" novalidate>
+        <input type="text" name="f_name" placeholder="Nombre" required />
+        <input type="text" name="l_name" placeholder="Apellido" required />
+        <input type="email" name="e_mail" placeholder="Correo electrónico" required />
+  
+        <div class="password-wrapper">
+          <input type="password" name="passw" id="password" placeholder="Contraseña" required />
+          <span class="toggle-password" onclick="togglePassword()">
+            👁
+          </span>
+        </div>
+        
+  
+        <button type="submit" class="btn">Registrarse</button>
+        <p class="alt-text">¿Ya tienes una cuenta? <a href="signin.html">Iniciar sesión</a></p>
+      </form>
+    </div>
+  </main>
+  
+
+  <footer>
+    <p>&copy; 2025 Schoolar. Todos los derechos reservados.</p>
+  </footer>
+  <script>//javascript
+    function togglePassword() {
+      const passwordInput = document.getElementById("password");
+      const toggleBtn = document.querySelector(".toggle-password");
+  
+      const isPassword = passwordInput.type === "password";
+      passwordInput.type = isPassword ? "text" : "password";
+      toggleBtn.textContent = isPassword ? "🙈" : "👁";
+    }
+  </script>
+  
+  
 </body>
 </html>
