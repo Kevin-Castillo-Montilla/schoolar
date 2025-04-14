@@ -9,29 +9,30 @@
 </head>
 <body>
 
+<!-- Botón flotante -->
+<button onclick="toggleSidebar()" class="floating-btn">☰</button>
+
 <!-- Sidebar -->
 <div class="sidebar" id="sidebar">
-    <!-- Flecha para cerrar la barra lateral -->
-    <button class="sidebar-close" onclick="toggleSidebar()">⬅️</button>
+  <h3>👤 Usuario: Kevin</h3>
+  <ul>
+    <li><a href="perfil.html">Perfil</a></li>
+    <li><a href="notificaciones.html">Notificaciones</a></li>
+    <li><a href="libros_guardados.html">Libros guardados</a></li>
+    <li><a href="videos_guardados.html">Videos guardados</a></li>
+    <li><a href="configuracion.html">Configuración</a></li>
+    <li><a href="terminos.html">Términos y condiciones</a></li>
+  </ul>
+</div>
   
-    <h3>👤 Usuario: Kevin</h3>
-    <ul>
-      <li><a href="perfil.html">Perfil</a></li>
-      <li><a href="notificaciones.html">Notificaciones</a></li>
-      <li><a href="libros_guardados.html">Libros guardados</a></li>
-      <li><a href="videos_guardados.html">Videos guardados</a></li>
-      <li><a href="configuracion.html">Configuración</a></li>
-      <li><a href="terminos.html">Términos y condiciones</a></li>
-    </ul>
-  </div>
-  
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
   <!-- Header -->
   <header class="header">
-    <div class="search-container">
-      <input type="text" id="search" placeholder="  Buscar libros, videos o noticias...">
-      <button id="search-btn">🔍</button>
+    <div class="search-wrapper">
+      <input type="text" id="search" placeholder="Buscar libros, videos o noticias...">
     </div>
+    
   </header>
   
 
@@ -86,15 +87,18 @@
       sidebar.classList.toggle('active');
     }
   
-    document.getElementById("search-btn").addEventListener("click", function () {
-      const query = document.getElementById("search").value.trim().toLowerCase();
-      if (query !== "") {
-        alert("Has buscado: " + query);
-      } else {
-        alert("Por favor, ingresa una palabra clave para buscar.");
+    document.getElementById("search").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        const query = this.value.trim().toLowerCase();
+        if (query !== "") {
+          alert("Has buscado: " + query);
+        } else {
+          alert("Por favor, ingresa una palabra clave para buscar.");
+        }
       }
     });
   </script>
+  
   
   
 </body>

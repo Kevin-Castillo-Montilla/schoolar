@@ -44,3 +44,4 @@ if ($res_check_email && pg_num_rows($res_check_email) > 0) {
 ?>
 
 
+c
