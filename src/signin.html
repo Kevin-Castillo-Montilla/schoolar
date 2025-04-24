@@ -5,42 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar Sesión - Schoolar</title>
   <link rel="stylesheet" href="../style.css">
-  <link rel="icon" type="image/png" href="../src/icons/bolsa-para-la-escuela.Shool.png" />
-  <meta name="description" content="Inicia sesión en Schoolar para acceder a tu aprendizaje con estilo." />
+  <link rel="icon" type="image/png" href="../src/icons/bolsa-para-la-escuela.Shool.png">
+  <meta name="description" content="Inicia sesión en Schoolar para acceder a tu aprendizaje con estilo.">
 </head>
 <body class="fondo-signin">
   
-  <!-- Botón de Volver en la parte superior izquierda -->
-  <a href="../index.html" class="back-button">Volver al inicio</a>
+  <!-- Botón de Volver -->
+  <a href="../src/home.html" class="back-button" aria-label="Volver al inicio">← Volver al inicio</a>
 
   <main>
     <div class="form-container">
       <div class="content-container">
-      <img src="icons/jugador.png" alt="Ícono de Usuario" width="60" class="form-logo">
-      <h2>Iniciar Sesión</h2>
-      <form name="login-form" action="signin.php" method="post" novalidate>
-        <input type="email" name="e_mail" placeholder="Correo electrónico" required>
-        <div class="password-wrapper">
-          <input type="password" name="passw" id="password" placeholder="Contraseña" required />
-          <span class="toggle-password" onclick="togglePassword()">
-            👁
-          </span>
-        </div>
-        <button type="submit" class="btn"> Entrar</button>
-        <p class="alt-text">¿No tienes cuenta? <a href="signup.html">Regístrate</a></p>
-      </form>
+        <img src="../src/icons/jugador.png" alt="Ícono de Usuario" width="60" class="form-logo">
+        <h2>Iniciar Sesión</h2>
+
+        <form name="login-form" action="signin.php" method="post" novalidate>
+          <input type="email" name="e_mail" placeholder="Correo electrónico" required autocomplete="email">
+
+          <div class="password-wrapper">
+            <input type="password" name="passw" id="password" placeholder="Contraseña" required autocomplete="current-password">
+            <span class="toggle-password" onclick="togglePassword()" title="Mostrar u ocultar contraseña">👁</span>
+          </div>
+
+          <button type="submit" class="btn">Entrar</button>
+          <p class="alt-text">¿No tienes cuenta? <a href="signup.html">Regístrate</a></p>
+        </form>
+      </div>
     </div>
-  </div>
   </main>
 
   <footer>
     <p>&copy; 2025 Schoolar. Todos los derechos reservados.</p>
   </footer>
-  <script>//javascript
+
+  <script>
     function togglePassword() {
       const passwordInput = document.getElementById("password");
       const toggleBtn = document.querySelector(".toggle-password");
-  
+
       const isPassword = passwordInput.type === "password";
       passwordInput.type = isPassword ? "text" : "password";
       toggleBtn.textContent = isPassword ? "🙈" : "👁";

@@ -10,7 +10,7 @@ $enc_pass = sha1($passw); // Este es el método que usaste en el registro, pero 
 
 // Consulta SQL para verificar si el correo existe en la base de datos
 $sql_check_email = "SELECT COUNT(email) as total FROM users WHERE email = $1";
-
+    
 $stmt_check_email = pg_prepare($conn, "check_email", $sql_check_email);
 $res_check_email = pg_execute($conn, "check_email", array($email));
 
@@ -22,26 +22,31 @@ if ($res_check_email && pg_num_rows($res_check_email) > 0) {
         echo "<script>alert('El correo no existe. Por favor, regístrate.'); window.location.href='signup.html';</script>";
     } else {
         // Si el correo existe, proceder a verificar la contraseña
-        $sql = "SELECT id, email FROM users WHERE email = $1 AND password = $2 AND status = true";
+      // Eliminar el uso de sha1(), ya que no es seguro
+// Utilizamos password_verify() para comparar la contraseña ingresada con el hash guardado en la base de datos
 
-        $stmt = pg_prepare($conn, "validate_user", $sql);
-        $res = pg_execute($conn, "validate_user", array($email, $enc_pass));
+$sql = "SELECT id, email, password FROM users WHERE email = $1 AND status = true";
+$stmt = pg_prepare($conn, "validate_user", $sql);
+$res = pg_execute($conn, "validate_user", array($email));
 
-        if ($res && pg_num_rows($res) > 0) {
-            // Usuario autenticado
-            // Redirigir a la página de inicio
-            header('Location: home.html');
-            exit();
-        } else {
-            // Credenciales incorrectas
-            echo "<script>alert('Correo o contraseña incorrectos'); window.location.href='signin.html';</script>";
-        }
+if ($res && pg_num_rows($res) > 0) {
+    // Verificar si el correo existe y si la contraseña coincide con el hash guardado
+    $row = pg_fetch_assoc($res);
+    if (password_verify($passw, $row['password'])) {
+        // Usuario autenticado correctamente
+        $_SESSION['user_id'] = $row['id']; // Almacenamos el ID del usuario en la sesión
+        $_SESSION['user_name'] = $row['email']; // Puedes usar el email o el nombre de usuario
+        header('Location: user.html');
+        exit();
+    } else {
+        // Contraseña incorrecta
+        echo "<script>alert('Correo o contraseña incorrectos'); window.location.href='signin.html';</script>";
+    }
+  }
+
     }
 } else {
     // Error en la consulta
     echo "<script>alert('Hubo un problema al verificar el correo. Inténtalo de nuevo.'); window.location.href='signin.html';</script>";
 }
 ?>
-
-
-c

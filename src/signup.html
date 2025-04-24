@@ -10,7 +10,7 @@
 <body class="fondo-signup">
 
   <!-- Botón de Volver en la parte superior izquierda -->
-  <a href="../index.html" class="back-button">Volver al inicio</a>
+  <a href="../src/home.html" class="back-button">Volver al inicio</a>
 
   <main>
     <div class="form-container">
@@ -20,18 +20,15 @@
         <input type="text" name="f_name" placeholder="Nombre" required />
         <input type="text" name="l_name" placeholder="Apellido" required />
         <input type="email" name="e_mail" placeholder="Correo electrónico" required />
-  
         <div class="password-wrapper">
-          <input type="password" name="passw" id="password" placeholder="Contraseña" required />
-          <span class="toggle-password" onclick="togglePassword()">
-            👁
-          </span>
+            <input type="password" name="passw" id="password" placeholder="Contraseña" required />
+            <span class="toggle-password" onclick="togglePassword()">👁</span>
         </div>
-        
-  
         <button type="submit" class="btn">Registrarse</button>
         <p class="alt-text">¿Ya tienes una cuenta? <a href="signin.html">Iniciar sesión</a></p>
-      </form>
+    </form>
+    
+
     </div>
   </main>
   
@@ -48,6 +45,18 @@
       passwordInput.type = isPassword ? "text" : "password";
       toggleBtn.textContent = isPassword ? "🙈" : "👁";
     }
+    document.forms["register-form"].onsubmit = function(event) {
+    var email = document.forms["register-form"]["e_mail"].value;
+    if (!validateEmail(email)) {
+        alert("Por favor, ingresa un correo electrónico válido.");
+        event.preventDefault(); // Evitar el envío del formulario
+    }
+};
+
+function validateEmail(email) {
+    var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return re.test(email);
+}
   </script>
   
   

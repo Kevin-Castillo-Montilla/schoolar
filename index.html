@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Schoolar - Home</title>
-  <link rel="icon" type="image/png" href="src/icons/bolsa-para-la-escuela.Shool.png">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Plataforma educativa para estudiantes modernos. Explora tu aprendizaje con estilo.">
+  <title>Schoolar - Bienvenido</title>
+  <link rel="icon" href="src/icons/bolsa-para-la-escuela.Shool.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="fondo-index">
-  <!-- Logo fijado en la parte superior izquierda -->
-  <div class="logo-container">
-    <img src="src/icons/klipartz.com (1).png" alt="Logo Schoolar" class="logo" width="250" height="140">
-  </div>
+<body>
+  
+  <!-- Header fijo con logo -->
+  <header class="main-header">
+    <img src="src/icons/klipartz.com (1).png" alt="Logo de Schoolar" class="logo" />
+  </header>
 
-  <div class="overlay">
-    <div class="content-container">
-      <!-- Logo opcional dentro del contenido (puedes quitarlo si no lo necesitas) -->
-      <div class="logo-art">
-        <img src="src/icons/herramientas-creativas.png" alt="Logo Schoolar" class="logo" width="120" height="120">
-      </div>
-
-      <!-- Título y Texto -->
+  <!-- Contenedor principal con fondo -->
+  <main class="home-overlay" role="main">
+    <section class="content-container">
       <div class="text-content">
-        <h1>Bienvenido a <span>Schoolar</span></h1>
+        <h1>Bienvenido a <span class="highlight">Schoolar</span></h1>
         <p>Explora tu aprendizaje <strong>con estilo</strong>.</p>
       </div>
 
-      <!-- Botones -->
-      <div class="buttons-container">
-        <a href="src/signin.html" class="btn">Iniciar sesión</a>
-        <a href="src/signup.html" class="btn alt">Registrarse</a>
-      </div>
-    </div>
-  </div>
+      <nav class="buttons-container" aria-label="Acciones principales">
+        <a href="../schoolar/src/signin.html" class="btn">Iniciar sesión</a>
+        <a href="../schoolar/src/signup.html" class="btn alt">Registrarse</a>
+      </nav>
+    </section>
+  </main>
+
 </body>
 </html>
-

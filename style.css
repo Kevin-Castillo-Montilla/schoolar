@@ -1,100 +1,124 @@
-/* Fondo y configuración general */
-body.fondo-index {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background-image: url('src/Imagenes/Brown\ University.jpeg'); /* Cambia la ruta a tu imagen de fondo */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    position: relative;
-  }
-  
-  /* Logo fijo en la esquina superior izquierda */
-  .logo-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 10;
-  }
-  
-  .logo-container .logo {
-    /* Ya definimos el width y height en el HTML, se podría ajustar aquí si se requiere */
-  }
-  
-  /* Overlay con opacidad sutil para centrar el contenido pero sin tapar el fondo */
-  .overlay {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);  /* Overlay ligero: ajusta el valor (0.3) a lo que necesites */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Contenedor del contenido principal (texto y botones) */
+/*index*/
+/* Fondo general */
+.home-overlay {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("../schoolar/src/Imagenes/Brown\ University.jpeg"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 80px;
+  z-index: 1;
+}
+
+/* Header fijo con logo */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  z-index: 1000;
+}
+
+.logo {
+  height: 100px;
+  width: auto;
+}
+
+/* Tarjeta de bienvenida */
+.content-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: -50px; /* <- esto lo sube un poquito */
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.text-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.text-content .highlight {
+  color: #00d4ff;
+}
+
+.text-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row; /* antes era column */
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* por si en móvil no entra */
+}
+
+.btn {
+  padding: 0.75rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #00d4ff;
+  color: #fafafa;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #00bde0;
+}
+
+.btn.alt {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #00d4ff;
+}
+
+.btn.alt:hover {
+  background-color: #00d4ff;
+  color: #f9f9ff;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 600px) {
   .content-container {
-    text-align: center;
     padding: 2rem;
-    max-width: 600px;
-    width: 90%;
-    border-radius: 10px;
-    /* Sin fondo sólido para que el background se vea; 
-       si deseas un sutil fondo detrás del texto, puedes usar: */
-    /* background: rgba(0, 0, 0, 0.4); */
   }
-  
-  /* Estilo del logo dentro del contenido (opcional) */
-  .logo-art {
-    margin-bottom: 1rem;
-  }
-  
-  /* Título y subtítulo */
+
   .text-content h1 {
-    font-size: 2.5rem;
-    margin: 0.5rem 0;
+    font-size: 2rem;
   }
-  
-  .text-content span {
-    color: #3498db;
-  }
-  
+
   .text-content p {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
-  
-  /* Contenedor de botones */
-  .buttons-container {
-    margin-top: 2rem;
-  }
-  
-  /* Botones */
-  .btn {
-    display: inline-block;
-    margin: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-  
-  .btn.alt {
-    background: #2ecc71;
-  }
-  
-  .btn:hover {
-    background: #2980b9;
-    transform: scale(1.05);
-  }
-  
-  .btn.alt:hover {
-    background: #27ae60;
-  }
+}
+
   /* ahora continuemos con signin*/
 
   body.fondo-signin {
@@ -271,286 +295,279 @@ body {
     border: none;
   }
   /*estilo del home*/
-  /* dashboard.css */
-/* --------- General --------- */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+ /* estilo del home - versión clara institucional */
+/* --------- Variables --------- */
+:root.home-overlay {
+  --primary-color: #0056b3; /* Azul más oscuro */
+  --secondary-color: #ffffff; /* Blanco */
+  --background-light: #f5f5f5; /* Gris muy claro */
+  --text-color: #1c1c1c; /* Color de texto oscuro */
+  --accent-color: #00aaff; /* Azul claro */
+  --highlight-color: #e60000; /* Rojo brillante */
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+  --transition: all 0.3s ease-in-out;
+  --font-main: 'Segoe UI', sans-serif;
 }
+
+/* --------- Global --------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: rgb(32, 89, 248);
+  background-color: rgb(32, 89, 248);
+  color: white;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+/*estilo boton*/
+
+.logout-float {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #ff4444;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+.logout-float:hover {
+  background-color: #cc0000;
+}
+ 
 
 /* --------- Header --------- */
-.header {
-  background-color: #3a86ff;
-  color: #fff;
-  padding: 2rem;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  position: relative;
-}
-
-#search {
-  margin-top: 1rem;
-  padding: 0.75rem 1rem 0.75rem 2.5rem;
-  width: 50%;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  background-image: url('https://img.icons8.com/ios-filled/50/000000/search--v1.png');
-  background-repeat: no-repeat;
-  background-size: 18px;
-  background-position: 10px center;
-}
-
-/* --------- Sidebar --------- */
-/* Sidebar oculta inicialmente */
-.sidebar {
+.main-header {
   position: fixed;
   top: 0;
-  left: -250px;
-  width: 230px;
-  height: 100%;
-  background-color: #222;
-  color: #fff;
-  padding: 1rem;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-  transition: left 0.3s ease;
+  width: 100%;
+  background-color: black; /* Azul claro */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow:  white;
   z-index: 1000;
 }
 
-/* Cuando está activa */
-.sidebar.active {
-  left: 0;
+.logo {
+  height: 100px;
+  width: auto;
 }
 
-/* Botón flotante */
-.floating-btn {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  width: 55px;
-  height: 55px;
-  background-color: #007bff;
-  color: white;
-  font-size: 24px;
-  border: none;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  cursor: pointer;
-  z-index: 1001;
-  transition: background-color 0.2s ease;
-}
-
-.floating-btn:hover {
-  background-color: #0056b3;
-}
-
-/* Estilo para los enlaces del sidebar */
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar ul li a {
-  color: white;
-  text-decoration: none;
-  display: block;
-  padding: 10px 0;
-  border-bottom: 1px solid #444;
-}
-
-.sidebar ul li a:hover {
-  background-color: #333;
-}
-
-.sidebar-close {
-  position: absolute;
-  top: 1rem;
-  left: -100%; /* ✅ Para que esté a la derecha de la barra lateral */
-  transform: translateX(-40px); 
-  background-color: #202ba5;
-  color: #fff;
-  border: none;
-  padding: 0.5rem;
-  font-size: 1.2rem;
-  border-radius: 10px 0 0 10px;
-  cursor: pointer;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-}
-/* estilo boton barra lateral*/
-.open-sidebar-btn {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  background-color: #3a86ff;
-  color: white;
-  border: none;
-  padding: 0.5rem 0.8rem;
-  border-radius: 8px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 30;
-  box-shadow: 2px 2px 6px rgba(163, 21, 21, 0.2);
-}
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  z-index: 999;
-}
-
-/* Mostrar el overlay cuando el sidebar está activo */
-.sidebar.active + .overlay {
-  display: block;
-}
-
-.search-container {
+.nav-links {
   display: flex;
-  justify-content: center;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white; /* Blanco */
+  font-weight: bold;
+  transition:white;
+}
+
+.nav-links a:hover {
+  color:yellow; /* Rojo brillante */
+}
+
+/* --------- Hero Section --------- */
+.hero {
+  height: 100vh;
+  background-image: url('src/Imagenes/Brown\ University.jpeg'); /* Blanco */
+  display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 1rem;
+  justify-content: center;
+  text-align: center;
+  padding-top: 5rem;
+  position: relative;
 }
 
-#search-btn {
-  background-color: #2b2d42;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  cursor: pointer;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  background-image: url('src/Imagenes/Brown\ University.jpeg');
+  padding: 3rem;
+  border-radius: rgb(83, 137, 255);
+  box-shadow: rgb(77, 132, 252);
 }
 
-#search-btn:hover {
-  background-color: #3a86ff;
-}
-
-/* --------- Content --------- */
-.main-container {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  margin-left: 0;
-}
-
-/* --------- Sections --------- */
-section h2 {
-  font-size: 1.8rem;
+.hero-content h1 {
+  font-size: 3rem;
+  color: black; /* Azul claro */
   margin-bottom: 1rem;
-  color: #3a86ff;
-  border-left: 5px solid #8338ec;
-  padding-left: 0.5rem;
 }
 
-/* Cards, grids, videos, footer siguen igual */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.news-card {
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.news-card:hover {
-  transform: translateY(-5px);
-}
-
-.news-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.news-card h3 {
-  margin: 1rem;
+.hero-content p {
   font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
-.news-card p {
-  margin: 0 1rem 1rem;
-  color: #555;
+/* --------- Botones --------- */
+.btn:hover {
+  background-color: #fdff7f;
+}
+/* --------- Sección de Características --------- */
+.features {
+  padding: 5rem 2rem;
+  text-align: center;
+  background-color: #4e9ffc; 
 }
 
-.book-list, .video-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color:white; 
 }
 
-.book-card, .video-list iframe {
-  flex: 1 1 200px;
-  background: #fff;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
 }
 
-.video-list iframe {
-  height: 200px;
-  border: none;
+.feature-card {
+  background:#4e9ffc;
+  padding: 2rem;
+  border-radius: white;
+  box-shadow: red;
+  transition: green;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  background:rgb(88, 153, 250);
+}
+
+.feature-card h3 {
+  margin-bottom: 1rem;
+  color: white; 
+}
+
+/* --------- Testimonios --------- */
+.testimonials {
+  padding: 5rem 2rem;
+  background-color: #4e9ffc; 
+  text-align: center;
+}
+
+.testimonials h2 {
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  color: white; 
+}
+
+.testimonial {
+  background: #4e9ffc;
+  padding: 2rem;
+  border-radius: white;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.testimonial p {
+  font-style: italic;
+}
+
+.testimonial span {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: white; 
+}
+
+/* --------- Contacto --------- */
+.contact {
+  padding: 5rem 2rem;
+  background-color:#4e9ffc; 
+  color: white; 
+}
+
+.contact h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color:#4e9ffc;
+  padding: 2rem;
+  border-radius: white;
+  box-shadow: gray;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid black;
+  margin-bottom: 1.5rem;
+  background: #fdfdfd;
+  color:black;
+}
+
+.contact-form button {
+  width: 100%;
 }
 
 /* --------- Footer --------- */
-.footer {
-  background-color: #2b2d42;
-  color: #fff;
+footer {
+  background-color: #4e9ffc;
   text-align: center;
-  padding: 1rem;
-  margin-top: 3rem;
-}
-/* buscador*/
-.search-container {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
+  padding: 2rem 1rem;
+  color: white;
+  font-size: 0.9rem;
 }
 
-#search {
-  padding: 0.75rem 1rem;
-  width: 50%;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+footer a {
+  color: var(--primary-color);
+  margin: 0 0.5rem;
 }
 
-#search-btn {
-  padding: 0.75rem 1rem;
-  background-color: #ef476f;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: background 0.3s ease;
-}
+/* --------- Responsivo --------- */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 2rem;
+  }
 
-#search-btn:hover {
-  background-color: #d43d60;
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;  
+  }
 }
