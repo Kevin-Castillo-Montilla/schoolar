@@ -17,7 +17,7 @@
         <li><a href="#configuracion">Configuración</a></li>
         <li><a href="logout.php">Cerrar Sesión</a></li>
       </ul>
-      <button id="themeToggle" class="btn toggle-theme">🌙</button>
+      <button id="themeToggle" class="btn toggle-theme">Modo Oscuro</button>
     </nav>
   </header>
 
