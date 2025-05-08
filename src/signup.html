@@ -10,7 +10,7 @@
 <body class="fondo-signup">
 
   <!-- Botón de Volver en la parte superior izquierda -->
-  <a href="../src/home.html" class="back-button">Volver al inicio</a>
+  <a href="../index.html" class="back-button">Volver al inicio</a>
 
   <main>
     <div class="form-container">
@@ -50,8 +50,8 @@
     if (!validateEmail(email)) {
         alert("Por favor, ingresa un correo electrónico válido.");
         event.preventDefault(); // Evitar el envío del formulario
-    }
-};
+     }
+  };
 
 function validateEmail(email) {
     var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;

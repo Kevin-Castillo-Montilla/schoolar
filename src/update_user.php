@@ -1,75 +1,48 @@
 <?php
 session_start();
-require 'conexion.php'; // Asegúrate de que este archivo conecta correctamente con tu base de datos
+header('Content-Type: application/json');
+
+include('../config/database.php');
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: signin.html");
-    exit;
+    echo json_encode(['error' => 'Acceso no autorizado.']);
+    exit();
 }
 
 $user_id = $_SESSION['user_id'];
+$fname = trim($_POST['firstname']);
+$lname = trim($_POST['lastname']);
+$email = trim($_POST['email']);
 
-// Recibir datos del formulario
-$username = $_POST['username'] ?? '';
-$email = $_POST['email'] ?? '';
-$password = $_POST['password'] ?? '';
-$photo = $_FILES['photo'] ?? null;
-
-// Validar datos mínimos
-if (empty($username) || empty($email)) {
-    echo "Por favor completa todos los campos obligatorios.";
-    exit;
+if (empty($fname) || empty($lname) || empty($email)) {
+    echo json_encode(['error' => 'Todos los campos son obligatorios.']);
+    exit();
 }
 
-// Subir foto de perfil si existe
-$photo_path = null;
-if ($photo && $photo['error'] === UPLOAD_ERR_OK) {
-    $ext = pathinfo($photo['name'], PATHINFO_EXTENSION);
-    $filename = uniqid('profile_', true) . "." . $ext;
-    $destination = "uploads/" . $filename;
-
-    if (!is_dir('uploads')) {
-        mkdir('uploads', 0755, true);
-    }
-
-    if (move_uploaded_file($photo['tmp_name'], $destination)) {
-        $photo_path = $destination;
-    }
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode(['error' => 'Correo electrónico no válido.']);
+    exit();
 }
 
-// Preparar query base
-$sql = "UPDATE users SET username = $1, email = $2";
-$params = [$username, $email];
-$param_index = 3;
+// Verificar si el nuevo correo ya está en uso por otro usuario
+$sql_check = "SELECT COUNT(*) AS total FROM users WHERE email = $1 AND id != $2";
+pg_prepare($conn, "check_email_conflict", $sql_check);
+$res_check = pg_execute($conn, "check_email_conflict", [$email, $user_id]);
+$row = pg_fetch_assoc($res_check);
 
-// Si se cambió la contraseña
-if (!empty($password)) {
-    $hashed = password_hash($password, PASSWORD_DEFAULT);
-    $sql .= ", password = $$param_index";
-    $params[] = $hashed;
-    $param_index++;
+if ($row['total'] > 0) {
+    echo json_encode(['error' => 'Este correo ya está en uso por otro usuario.']);
+    exit();
 }
 
-// Si se subió foto
-if ($photo_path) {
-    $sql .= ", photo = $$param_index";
-    $params[] = $photo_path;
-    $param_index++;
-}
+// Actualizar los datos
+$sql_update = "UPDATE users SET firstname = $1, lastname = $2, email = $3 WHERE id = $4";
+pg_prepare($conn, "update_user_info", $sql_update);
+$res_update = pg_execute($conn, "update_user_info", [$fname, $lname, $email, $user_id]);
 
-$sql .= " WHERE id = $$param_index";
-$params[] = $user_id;
-
-// Ejecutar query
-$stmt = pg_prepare($conn, "update_user", $sql);
-$result = pg_execute($conn, "update_user", $params);
-
-if ($result) {
-    // Actualizar sesión si cambió el nombre de usuario
-    $_SESSION['user_name'] = $username;
-    header("Location: user.html"); // Vuelve al perfil
-    exit;
+if ($res_update) {
+    echo json_encode(['success' => 'Datos actualizados correctamente.']);
 } else {
-    echo "Error al actualizar los datos.";
+    echo json_encode(['error' => 'Error al actualizar los datos.']);
 }
 ?>

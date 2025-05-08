@@ -5,30 +5,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Plataforma educativa para estudiantes modernos. Explora tu aprendizaje con estilo.">
   <title>Schoolar - Bienvenido</title>
-  <link rel="icon" href="src/icons/bolsa-para-la-escuela.Shool.png" type="image/png" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="src/icons/bolsa-para-la-escuela.Shool.png" type="image/png" />
 </head>
 <body>
-  
   <!-- Header fijo con logo -->
   <header class="main-header">
-    <img src="src/icons/klipartz.com (1).png" alt="Logo de Schoolar" class="logo" />
+    <img src="src/icons/klipartz.com (1).png"  class="logo" />
+    <nav class="nav-links">
+      <a href="#features">Características</a>
+      <a href="#testimonials">Testimonios</a>
+      <a href="#contact">Contacto</a>
+    </nav>
   </header>
 
-  <!-- Contenedor principal con fondo -->
-  <main class="home-overlay" role="main">
-    <section class="content-container">
-      <div class="text-content">
-        <h1>Bienvenido a <span class="highlight">Schoolar</span></h1>
-        <p>Explora tu aprendizaje <strong>con estilo</strong>.</p>
-      </div>
-
-      <nav class="buttons-container" aria-label="Acciones principales">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Bienvenido a <span class="highlight">Schoolar</span></h1>
+      <p>Explora tu aprendizaje con estilo, claridad y propósito.</p>
+      <div class="btn-group">
         <a href="../schoolar/src/signin.html" class="btn">Iniciar sesión</a>
         <a href="../schoolar/src/signup.html" class="btn alt">Registrarse</a>
-      </nav>
-    </section>
-  </main>
+      </div>
+    </div>
+  </section>
 
+  <!-- Características -->
+  <section id="features" class="features">
+    <h2>Características Principales</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>Interfaz Intuitiva</h3>
+        <p>Navegación clara y diseño adaptable para todos los dispositivos.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Progreso Visible</h3>
+        <p>Seguimiento de aprendizaje con estadísticas y logros.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Recursos Modernos</h3>
+        <p>Biblioteca interactiva, foros, y material actualizado.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section id="testimonials" class="testimonials">
+    <h2>Lo que dicen nuestros usuarios</h2>
+    <div class="testimonial">
+      <p>"Schoolar cambió completamente la forma en que aprendo. Es simple, bonito y efectivo."</p>
+      <span>- María López</span>
+    </div>
+    <div class="testimonial">
+      <p>"Finalmente una plataforma que no me frustra. Todo está donde debe estar."</p>
+      <span>- Juan Pérez</span>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contact" class="contact">
+    <h2>Contáctanos</h2>
+    <form class="contact-form">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Mensaje</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit" class="btn">Enviar mensaje</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Schoolar. Todos los derechos reservados.</p>
+    <p><a href="#">Términos</a> | <a href="#">Privacidad</a></p>
+  </footer>
 </body>
 </html>

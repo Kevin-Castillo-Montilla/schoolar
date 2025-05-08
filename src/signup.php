@@ -17,7 +17,7 @@ if (empty($fname) || empty($lname) || empty($email) || empty($passwd)) {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "El correo electrónico no es válido.";
     } else {
-        // Prevenir inyecciones SQL con consultas preparadas
+    
         $stmt = pg_prepare($conn, "check_email", "SELECT COUNT(email) as total FROM users WHERE email = $1 LIMIT 1");
         $result = pg_execute($conn, "check_email", array($email));
 

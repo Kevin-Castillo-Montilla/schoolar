@@ -3,87 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Plataforma educativa para estudiantes modernos. Explora tu aprendizaje con estilo.">
-  <title>Schoolar - Bienvenido</title>
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="icon" href="icons/bolsa-para-la-escuela.Shool.png" type="image/png" />
+  <title>Panel de Usuario - Schoolar</title>
+  <link rel="stylesheet" href="../stylehome.css" />
+  <link rel="icon" type="image/png" href="../src/icons/bolsa-para-la-escuela.Shool.png" />
 </head>
-<body>
-  <!-- Header fijo con logo -->
-  <header class="main-header">
-    <img src="icons/klipartz.com (1).png" alt="Logo de Schoolar" class="logo" />
-    <nav class="nav-links">
-      <a href="#features">Características</a>
-      <a href="#testimonials">Testimonios</a>
-      <a href="#contact">Contacto</a>
+<body class="home-body">
+  
+  <header class="home-header">
+    <img src="../src/icons/klipartz.com (1).png" alt="Logo Schoolar" class="logo" />
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#perfil">Mi Perfil</a></li>
+        <li><a href="#configuracion">Configuración</a></li>
+        <li><a href="logout.php">Cerrar Sesión</a></li>
+      </ul>
+      <button id="themeToggle" class="btn toggle-theme">🌙</button>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Bienvenido a <span class="highlight">Schoolar</span></h1>
-      <p>Explora tu aprendizaje con estilo, claridad y propósito.</p>
-      <div class="btn-group">
-        <a href="signin.html" class="btn">Iniciar sesión</a>
-        <a href="signup.html" class="btn alt">Registrarse</a>
-      </div>
-    </div>
-  </section>
+  <main class="dashboard">
+    <section class="profile-card" id="perfil">
+      <img src="../uploads/default.png" alt="Foto de perfil" class="profile-img" id="profileImage">
+      <input type="file" id="upload" hidden>
+      <label for="upload" class="upload-btn">Cambiar foto</label>
 
-  <!-- Características -->
-  <section id="features" class="features">
-    <h2>Características Principales</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <h3>Interfaz Intuitiva</h3>
-        <p>Navegación clara y diseño adaptable para todos los dispositivos.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Progreso Visible</h3>
-        <p>Seguimiento de aprendizaje con estadísticas y logros.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Recursos Modernos</h3>
-        <p>Biblioteca interactiva, foros, y material actualizado.</p>
-      </div>
-    </div>
-  </section>
+      <h2 id="userName">Nombre Usuario</h2>
+      <p id="userEmail">correo@ejemplo.com</p>
+    </section>
 
-  <!-- Testimonios -->
-  <section id="testimonials" class="testimonials">
-    <h2>Lo que dicen nuestros usuarios</h2>
-    <div class="testimonial">
-      <p>"Schoolar cambió completamente la forma en que aprendo. Es simple, bonito y efectivo."</p>
-      <span>- María López</span>
-    </div>
-    <div class="testimonial">
-      <p>"Finalmente una plataforma que no me frustra. Todo está donde debe estar."</p>
-      <span>- Juan Pérez</span>
-    </div>
-  </section>
+    <section class="user-data" id="configuracion">
+      <h3>Datos Personales</h3>
+      <form id="updateForm" method="post" action="../php/update_user.php">
+        <label for="firstName">Nombre</label>
+        <input type="text" id="firstName" name="firstname" required>
 
-  <!-- Contacto -->
-  <section id="contact" class="contact">
-    <h2>Contáctanos</h2>
-    <form class="contact-form">
-      <label for="name">Nombre</label>
-      <input type="text" id="name" name="name" required />
+        <label for="lastName">Apellido</label>
+        <input type="text" id="lastName" name="lastname" required>
 
-      <label for="email">Correo electrónico</label>
-      <input type="email" id="email" name="email" required />
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" required>
 
-      <label for="message">Mensaje</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
+        <button type="submit" class="btn save-btn">Guardar Cambios</button>
+      </form>
+    </section>
 
-      <button type="submit" class="btn">Enviar mensaje</button>
-    </form>
-  </section>
+    <section class="password-change">
+      <h3>Cambiar Contraseña</h3>
+      <form id="passwordForm" method="post" action="../php/change_password.php">
+        <label for="newPassword">Nueva Contraseña</label>
+        <input type="password" id="newPassword" name="new_password" required>
 
-  <!-- Footer -->
+        <label for="confirmPassword">Confirmar Contraseña</label>
+        <input type="password" id="confirmPassword" name="confirm_password" required>
+
+        <button type="submit" class="btn pass-btn">Actualizar Contraseña</button>
+      </form>
+    </section>
+  </main>
+
   <footer>
     <p>&copy; 2025 Schoolar. Todos los derechos reservados.</p>
-    <p><a href="#">Términos</a> | <a href="#">Privacidad</a></p>
   </footer>
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      toggleBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
+  </script>
 </body>
 </html>

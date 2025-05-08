@@ -1,30 +1,59 @@
 /*index*/
-/* Fondo general */
-.home-overlay {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background-image: url("../schoolar/src/Imagenes/Brown\ University.jpeg"); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 80px;
-  z-index: 1;
+/* --------- Variables --------- */
+/* --------- Variables --------- */
+:root {
+  --primary-color: #0056b3;
+  --secondary-color: #ffffff;
+  --background-light: #f5f5f5;
+  --text-color: #1c1c1c;
+  --accent-color: #00aaff;
+  --highlight-color: #e60000;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+  --transition: all 0.3s ease-in-out;
+  --font-main: 'Segoe UI', sans-serif;
 }
 
-/* Header fijo con logo */
+/* --------- Global --------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: var(--font-main);
+  background-color: rgb(32, 89, 248);
+  color: white;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* --------- Header --------- */
 .main-header {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  padding: 1rem 2rem;
+  background-color: black;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  background: transparent;
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow);
   z-index: 1000;
 }
 
@@ -33,89 +62,248 @@
   width: auto;
 }
 
-/* Tarjeta de bienvenida */
-.content-container {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 2.5rem 2rem;
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: yellow;
+}
+
+/* --------- Hero Section --------- */
+.hero {
+  height: 100vh;
+  background-image: url('src/Imagenes/Brown University.jpeg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: -50px; /* <- esto lo sube un poquito */
+  padding-top: 5rem;
+  position: relative;
 }
 
-/* Animación suave */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 3rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
-.text-content h1 {
-  font-size: 2.5rem;
+.hero-content h1 {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* --------- Botones --------- */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  background-color: #fdff7f;
+  color: black;
+}
+
+.btn.alt {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+.btn.alt:hover {
+  background-color: var(--highlight-color);
+  color: white;
+}
+
+/* --------- Sección de Características --------- */
+.features {
+  padding: 5rem 2rem;
+  text-align: center;
+  background-color: #4e9ffc;
+}
+
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  color: white;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background-color: #4e9ffc;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  background-color: rgb(88, 153, 250);
+}
+
+.feature-card h3 {
   margin-bottom: 1rem;
   color: white;
 }
 
-.text-content .highlight {
-  color: #00d4ff;
+/* --------- Testimonios --------- */
+.testimonials {
+  padding: 5rem 2rem;
+  background-color: #4e9ffc;
+  text-align: center;
 }
 
-.text-content p {
-  font-size: 1.2rem;
+.testimonials h2 {
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  color: white;
+}
+
+.testimonial {
+  background-color: #4e9ffc;
+  padding: 2rem;
+  border-radius: var(--radius);
   margin-bottom: 2rem;
-  color: #ffffff;
+  max-width: 600px;
+  margin-inline: auto;
+  box-shadow: var(--shadow);
 }
 
-.buttons-container {
-  display: flex;
-  flex-direction: row; /* antes era column */
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap; /* por si en móvil no entra */
+.testimonial p {
+  font-style: italic;
 }
 
-.btn {
-  padding: 0.75rem 1.2rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #00d4ff;
-  color: #fafafa;
+.testimonial span {
+  display: block;
+  margin-top: 1rem;
   font-weight: bold;
-  cursor: pointer;
+  color: white;
+}
+
+/* --------- Contacto --------- */
+.contact {
+  padding: 5rem 2rem;
+  background-color: #4e9ffc;
+  color: white;
+}
+
+.contact h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #4e9ffc;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid black;
+  margin-bottom: 1.5rem;
+  background: #fdfdfd;
+  color: black;
+  border-radius: var(--radius);
+}
+
+.contact-form button {
+  width: 100%;
+}
+
+/* --------- Footer --------- */
+footer {
+  background-color: #4e9ffc;
+  text-align: center;
+  padding: 2rem 1rem;
+  color: white;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: white;
+  margin: 0 0.5rem;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: yellow;
+}
+
+/* --------- Botón Flotante Logout (opcional) --------- */
+.logout-float {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #ff4444;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
   text-decoration: none;
-  transition: background 0.3s ease;
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  transition: background-color 0.3s ease;
 }
 
-.btn:hover {
-  background-color: #00bde0;
+.logout-float:hover {
+  background-color: #cc0000;
 }
 
-.btn.alt {
-  background-color: transparent;
-  color: #fff;
-  border: 2px solid #00d4ff;
-}
-
-.btn.alt:hover {
-  background-color: #00d4ff;
-  color: #f9f9ff;
-}
-
-/* Responsivo para móviles */
-@media (max-width: 600px) {
-  .content-container {
+/* --------- Responsive --------- */
+@media (max-width: 768px) {
+  .hero-content {
     padding: 2rem;
   }
 
-  .text-content h1 {
+  .hero-content h1 {
     font-size: 2rem;
   }
 
-  .text-content p {
-    font-size: 1rem;
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -295,279 +483,3 @@ body {
     border: none;
   }
   /*estilo del home*/
- /* estilo del home - versión clara institucional */
-/* --------- Variables --------- */
-:root.home-overlay {
-  --primary-color: #0056b3; /* Azul más oscuro */
-  --secondary-color: #ffffff; /* Blanco */
-  --background-light: #f5f5f5; /* Gris muy claro */
-  --text-color: #1c1c1c; /* Color de texto oscuro */
-  --accent-color: #00aaff; /* Azul claro */
-  --highlight-color: #e60000; /* Rojo brillante */
-  --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  --radius: 12px;
-  --transition: all 0.3s ease-in-out;
-  --font-main: 'Segoe UI', sans-serif;
-}
-
-/* --------- Global --------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  font-family: rgb(32, 89, 248);
-  background-color: rgb(32, 89, 248);
-  color: white;
-  scroll-behavior: smooth;
-  min-height: 100vh;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  list-style: none;
-}
-/*estilo boton*/
-
-.logout-float {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background-color: #ff4444;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  transition: background-color 0.3s ease;
-}
-.logout-float:hover {
-  background-color: #cc0000;
-}
- 
-
-/* --------- Header --------- */
-.main-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: black; /* Azul claro */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  box-shadow:  white;
-  z-index: 1000;
-}
-
-.logo {
-  height: 100px;
-  width: auto;
-}
-
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  color: white; /* Blanco */
-  font-weight: bold;
-  transition:white;
-}
-
-.nav-links a:hover {
-  color:yellow; /* Rojo brillante */
-}
-
-/* --------- Hero Section --------- */
-.hero {
-  height: 100vh;
-  background-image: url('src/Imagenes/Brown\ University.jpeg'); /* Blanco */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding-top: 5rem;
-  position: relative;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  background-image: url('src/Imagenes/Brown\ University.jpeg');
-  padding: 3rem;
-  border-radius: rgb(83, 137, 255);
-  box-shadow: rgb(77, 132, 252);
-}
-
-.hero-content h1 {
-  font-size: 3rem;
-  color: black; /* Azul claro */
-  margin-bottom: 1rem;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-}
-
-/* --------- Botones --------- */
-.btn:hover {
-  background-color: #fdff7f;
-}
-/* --------- Sección de Características --------- */
-.features {
-  padding: 5rem 2rem;
-  text-align: center;
-  background-color: #4e9ffc; 
-}
-
-.features h2 {
-  font-size: 2rem;
-  margin-bottom: 3rem;
-  color:white; 
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.feature-card {
-  background:#4e9ffc;
-  padding: 2rem;
-  border-radius: white;
-  box-shadow: red;
-  transition: green;
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-  background:rgb(88, 153, 250);
-}
-
-.feature-card h3 {
-  margin-bottom: 1rem;
-  color: white; 
-}
-
-/* --------- Testimonios --------- */
-.testimonials {
-  padding: 5rem 2rem;
-  background-color: #4e9ffc; 
-  text-align: center;
-}
-
-.testimonials h2 {
-  margin-bottom: 3rem;
-  font-size: 2rem;
-  color: white; 
-}
-
-.testimonial {
-  background: #4e9ffc;
-  padding: 2rem;
-  border-radius: white;
-  margin-bottom: 2rem;
-  max-width: 600px;
-  margin-inline: auto;
-}
-
-.testimonial p {
-  font-style: italic;
-}
-
-.testimonial span {
-  display: block;
-  margin-top: 1rem;
-  font-weight: bold;
-  color: white; 
-}
-
-/* --------- Contacto --------- */
-.contact {
-  padding: 5rem 2rem;
-  background-color:#4e9ffc; 
-  color: white; 
-}
-
-.contact h2 {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.contact-form {
-  max-width: 600px;
-  margin: 0 auto;
-  background-color:#4e9ffc;
-  padding: 2rem;
-  border-radius: white;
-  box-shadow: gray;
-}
-
-.contact-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid black;
-  margin-bottom: 1.5rem;
-  background: #fdfdfd;
-  color:black;
-}
-
-.contact-form button {
-  width: 100%;
-}
-
-/* --------- Footer --------- */
-footer {
-  background-color: #4e9ffc;
-  text-align: center;
-  padding: 2rem 1rem;
-  color: white;
-  font-size: 0.9rem;
-}
-
-footer a {
-  color: var(--primary-color);
-  margin: 0 0.5rem;
-}
-
-/* --------- Responsivo --------- */
-@media (max-width: 768px) {
-  .hero-content {
-    padding: 2rem;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .features-grid {
-    grid-template-columns: 1fr;  
-  }
-}

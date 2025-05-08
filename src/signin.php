@@ -36,7 +36,7 @@ if ($res && pg_num_rows($res) > 0) {
         // Usuario autenticado correctamente
         $_SESSION['user_id'] = $row['id']; // Almacenamos el ID del usuario en la sesión
         $_SESSION['user_name'] = $row['email']; // Puedes usar el email o el nombre de usuario
-        header('Location: user.html');
+        header('Location: home.html'); // Redirigir a la página de inicio
         exit();
     } else {
         // Contraseña incorrecta

@@ -1,0 +1,204 @@
+/*======================
+  VARIABLES Y MODO OSCURO
+========================*/
+:root {
+  --bg-color: #f5f9ff;
+  --text-color: #1a1a1a;
+  --primary: #003366;
+  --primary-hover: #00264d;
+  --accent: #007bff;
+  --accent-hover: #0056b3;
+  --card-bg: #ffffff;
+  --input-border: #ccc;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --primary: #1a1a1a;
+  --primary-hover: #333333;
+  --accent: #3399ff;
+  --accent-hover: #007acc;
+  --card-bg: #1e1e1e;
+  --input-border: #444444;
+  --shadow: rgba(255, 255, 255, 0.1);
+}
+
+/*======================
+  RESET Y BASE
+========================*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body.home-body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  padding-bottom: 50px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/*======================
+  HEADER
+========================*/
+.home-header {
+  background: var(--primary);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.logo {
+  height: 50px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Botón de modo oscuro */
+.toggle-theme {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 20px;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.toggle-theme:hover {
+  transform: scale(1.2);
+}
+
+/*======================
+  DASHBOARD
+========================*/
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+}
+
+/*======================
+  TARJETA DE PERFIL
+========================*/
+.profile-card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 0 10px var(--shadow);
+  flex: 1 1 300px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.upload-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--accent);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.upload-btn:hover {
+  background: var(--accent-hover);
+}
+
+/*======================
+  FORMULARIOS
+========================*/
+.user-data,
+.password-change {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 0 10px var(--shadow);
+  flex: 1 1 400px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-data h3,
+.password-change h3 {
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid var(--input-border);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--text-color);
+}
+
+/* Botones */
+.btn {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  background: var(--primary);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: var(--primary-hover);
+}
+
+/*======================
+  FOOTER
+========================*/
+footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--primary);
+  color: white;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
