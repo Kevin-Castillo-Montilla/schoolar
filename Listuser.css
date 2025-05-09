@@ -1,0 +1,73 @@
+/* Estilos generales para la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 24px;
+}
+
+/* Contenedor de la tabla */
+.table-container {
+    width: 80%;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+td img {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+td img:hover {
+    opacity: 0.7;
+}
+
+/* Botón de editar y eliminar */
+td img {
+    transition: transform 0.3s ease;
+}
+
+td img:hover {
+    transform: scale(1.2);
+}
+
+/* Estilo para las imágenes */
+.action-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

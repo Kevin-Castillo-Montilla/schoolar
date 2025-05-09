@@ -1,5 +1,5 @@
 <?php
-include(../config/database.php);
+include('../config/database.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,9 @@ include(../config/database.php);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List.Users</title>
+    <link rel="stylesheet" href="../Listuser.css">
 </head>
+<li><a href="home.php">Volver</a></li>
 <body>
     <table border="1" align="center">
         <tr>
@@ -17,15 +19,37 @@ include(../config/database.php);
             <td>status</td>
             <td>...</td>
         </tr>
-        <tr>
-            <td>Kevin</td>
-            <td>Castillo</td>
-            <td>kevinandrescastillomontilla@gmail.com</td>
-            <td>TRUE</td>
-            <td>
-                <img src =
-            </td>
-        </tr>
-    
+        <?php
+        //code
+$sql = "
+    SELECT
+        firstname,
+        lastname,
+        email,
+        case when status= true then 'active' else 'No active' end as status
+    from 
+        users 
+        ";
+        $res = pg_query($conn,$sql);
+        if (!$res){
+            echo"Querry error";
+            exit;
+        }
+        while($row=pg_fetch_assoc($res)){
+          echo"  <tr>";
+          echo" <td>".$row ['firstname']."</td>";
+          echo" <td>".$row ['lastname']."</td>";
+          echo"  <td>".$row ['email']."</td>";
+          echo"<td>".$row ['status']."</td>";
+          echo"<td>";
+          echo"<a href=''><img src ='icons/edicion.png' width ='20'></a>";
+          echo"<a href=''><img src ='icons/bote-de-basura-mas.png' width ='20'></a>";
+          echo"<a href=''><img src ='icons/vaso.png' width= '20' > </a>";
+          echo"</td>";
+          echo"</tr> ";
+        }
+        ?>
+</table>
 </body>
 </html>
+<?php
