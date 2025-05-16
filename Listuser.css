@@ -1,73 +1,121 @@
-/* Estilos generales para la página */
+/* Fuente y fondo limpio */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
     margin: 0;
-    padding: 0;
-}
-
-h1 {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 24px;
-}
-
-/* Contenedor de la tabla */
-.table-container {
-    width: 80%;
-    margin: 50px auto;
-    background-color: white;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
 }
 
-/* Tabla */
-table {
+/* Link institucional con efecto */
+li a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 20px;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+li a::after {
+    content: '';
+    position: absolute;
     width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: -100%;
+    background-color: #007bff;
+    transition: left 0.4s ease;
+}
+
+li a:hover::after {
+    left: 0;
+}
+
+/* Tabla con animación de entrada */
+table {
+    width: 90%;
+    margin: 40px auto;
     border-collapse: collapse;
-    margin: 20px 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: floatIn 1s ease-out;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+/* Animación flotante */
+@keyframes floatIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
-}
-
-th {
-    background-color: #4CAF50;
+/* Encabezado azul elegante */
+table tr:first-child {
+    background-color: #007bff;
     color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
+/* Celdas normales */
 td {
-    background-color: #f9f9f9;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
 }
 
+/* Última fila sin borde */
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Hover suave con luz */
+tr:hover td {
+    background-color: #e6f0ff;
+    transition: background-color 0.4s, box-shadow 0.3s;
+    box-shadow: inset 0 0 10px #cce5ff;
+}
+
+/* Íconos futuristas */
 td img {
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-td img:hover {
-    opacity: 0.7;
-}
-
-/* Botón de editar y eliminar */
-td img {
-    transition: transform 0.3s ease;
+    width: 24px;
+    margin: 0 6px;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 td img:hover {
     transform: scale(1.2);
+    filter: drop-shadow(0 0 5px #007bff);
+    animation: pulse 0.6s infinite alternate;
 }
 
-/* Estilo para las imágenes */
-.action-icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Pulso futurista */
+@keyframes pulse {
+    from {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 3px #007bff);
+    }
+    to {
+        transform: scale(1.3);
+        filter: drop-shadow(0 0 8px #3399ff);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.9rem;
+    }
+
+    td img {
+        width: 20px;
+    }
 }

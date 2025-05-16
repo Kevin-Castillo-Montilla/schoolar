@@ -1,116 +1,122 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header('Location: signin.html');
+    header('Location: ../signin.html');
     exit();
 }
 
-// Configuración de conexión a la base de datos
 $host = "aws-0-us-east-1.pooler.supabase.com";
 $port = "6543";
 $dbname = "postgres";
 $user = "postgres.fyaevelnvphpaymvcpiv";
 $password = "1080040202";
 
-// Crear conexión con la base de datos
 $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
-
 if (!$conn) {
     die("Error en la conexión: " . pg_last_error());
 }
 
-// Verificar si la tabla "projects" existe
-$table_check_query = "SELECT to_regclass('public.projects');";
-$table_check_result = pg_query($conn, $table_check_query);
-$table_exists = pg_fetch_result($table_check_result, 0, 0);
-
-if ($table_exists == 'public.projects') {
-    // Obtener los proyectos públicos
-    $query = "SELECT p.id, p.title, p.description, p.file_path, p.created_at, u.firstname, u.lastname 
-              FROM projects p
-              JOIN users u ON p.user_id = u.id
-              WHERE p.is_public = true
-              ORDER BY p.created_at DESC";
-    $result = pg_query($conn, $query);
-
-    if (!$result) {
-        die("Error en la consulta: " . pg_last_error());
-    }
-} else {
-    // Si la tabla no existe, podemos mostrar un mensaje personalizado
-    $result = null;
-    $error_message = "La tabla de proyectos no existe en la base de datos.";
+$user_id = $_SESSION['user_id'];
+$query = "SELECT firstname, lastname, email, profile_picture FROM users WHERE id = $1";
+$result = pg_query_params($conn, $query, array($user_id));
+if (!$result || pg_num_rows($result) === 0) {
+    die("No se encontraron datos del usuario.");
 }
 
+$user_data = pg_fetch_assoc($result);
+$profile_picture = $user_data['profile_picture'] ? htmlspecialchars($user_data['profile_picture']) : 'default.png';
+$fullname = htmlspecialchars($user_data['firstname'] . ' ' . $user_data['lastname']);
+$email = htmlspecialchars($user_data['email']);
+pg_close($conn);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Proyectos - Schoolar</title>
+    <title>Mi Perfil - Schoolar</title>
     <link rel="stylesheet" href="../stylehome.css">
-    <link rel="icon" type="image/png" href="../src/icons/bolsa-para-la-escuela.Shool.png">
+    <link rel="icon" href="icons/bolsa-para-la-escuela.Shool.png" type="image/png">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 50%;
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #00bfff;
+        }
+
+        .edit-icon {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 50%;
+            padding: 6px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            margin-top: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .btn-group {
+            text-align: center;
+        }
+    </style>
 </head>
 <body class="home-body">
     <header class="home-header">
-        <img src="../src/icons/klipartz.com (1).png" alt="Logo Schoolar" class="logo" />
+        <img src="icons/klipartz.com (1).png" alt="Logo Schoolar" class="logo" />
         <nav>
             <ul class="nav-links">
                 <li><a href="Myperfil.php">Mi Perfil</a></li>
                 <li><a href="#configuracion">Configuración</a></li>
                 <li><a href="logout.php">Cerrar Sesión</a></li>
                 <li><a href="list_users.php">Lista de usuarios</a></li>
+                <button id="themeToggle" class="btn toggle-theme">🌙</button>
             </ul>
-            <button id="themeToggle" class="btn toggle-theme">Modo Oscuro</button>
         </nav>
     </header>
 
     <main class="dashboard">
         <section class="profile-card" id="perfil">
-            <img src="../uploads/default.png" alt="Foto de perfil" class="profile-img" id="profileImage">
-            <input type="file" id="upload" hidden>
-            <label for="upload" class="upload-btn">Cambiar foto</label>
-
-            <h2 id="userName">Nombre Usuario</h2>
-            <p id="userEmail">correo@ejemplo.com</p>
-        </section>
-
-        <section class="user-projects">
-            <h3>Proyectos Públicos</h3>
-
-            <?php
-            if ($result) {
-                if (pg_num_rows($result) > 0) {
-                    while ($project = pg_fetch_assoc($result)) {
-                        echo "<div class='project-card'>";
-                        echo "<h4>" . htmlspecialchars($project['title']) . "</h4>";
-                        echo "<p><strong>Descripción:</strong> " . htmlspecialchars($project['description']) . "</p>";
-                        echo "<p><strong>Publicado por:</strong> " . htmlspecialchars($project['firstname']) . " " . htmlspecialchars($project['lastname']) . "</p>";
-                        echo "<p><strong>Fecha de creación:</strong> " . htmlspecialchars($project['created_at']) . "</p>";
-                        echo "<a href='" . htmlspecialchars($project['file_path']) . "' target='_blank'>Ver Proyecto</a>";
-                        echo "</div>";
-                    }
-                } else {
-                    echo "<p>No hay proyectos públicos disponibles.</p>";
-                }
-            } else {
-                echo "<p>" . (isset($error_message) ? $error_message : "Hubo un problema al cargar los proyectos.") . "</p>";
-            }
-            ?>
-        </section>
-
-        <section class="password-change">
-            <h3>Cambiar Contraseña</h3>
-            <form id="passwordForm" method="post" action="../php/change_password.php">
-                <label for="newPassword">Nueva Contraseña</label>
-                <input type="password" id="newPassword" name="new_password" required>
-
-                <label for="confirmPassword">Confirmar Contraseña</label>
-                <input type="password" id="confirmPassword" name="confirm_password" required>
-
-                <button type="submit" class="btn pass-btn">Actualizar Contraseña</button>
+            <form action="update_profile_picture.php" method="post" enctype="multipart/form-data" class="profile-img-container">
+                <div class="profile-img-container">
+                    <img src="uploads/<?php echo $profile_picture; ?>" alt="Foto de perfil" class="profile-img" id="profileImage">
+                    <label for="upload" class="edit-icon" title="Cambiar foto">
+                        <i class="fas fa-pencil-alt"></i>
+                    </label>
+                </div>
+                <input type="file" id="upload" name="profile_picture" hidden accept="image/*">
+                <div class="btn-group">
+                    <button type="submit" class="submit-btn" id="saveBtn">Guardar imagen</button>
+                </div>
             </form>
+
+            <div class="profile-info">
+                <h2><?php echo $fullname; ?></h2>
+                <p><?php echo $email; ?></p>
+            </div>
         </section>
     </main>
 
@@ -119,16 +125,37 @@ if ($table_exists == 'public.projects') {
     </footer>
 
     <script>
+        const input = document.getElementById('upload');
+        const image = document.getElementById('profileImage');
+        const saveBtn = document.getElementById('saveBtn');
+
+        input.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    image.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+                saveBtn.style.display = 'inline-block';
+            } else {
+                saveBtn.style.display = 'none';
+            }
+        });
+
+        // Tema oscuro
         const toggleBtn = document.getElementById('themeToggle');
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            toggleBtn.textContent = '☀️';
+        }
+
         toggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            toggleBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            const isDark = document.body.classList.contains('dark-mode');
+            toggleBtn.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
     </script>
 </body>
 </html>
-
-<?php
-// Cerrar la conexión con la base de datos
-pg_close($conn);
-?>
