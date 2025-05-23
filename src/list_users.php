@@ -7,7 +7,7 @@ include('../config/database.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List.Users</title>
-    <link rel="stylesheet" href="../Listuser.css">
+<link rel="stylesheet" href="../Listuser.css">
 </head>
 <li><a href="home.php">Volver</a></li>
 <body>
@@ -17,6 +17,7 @@ include('../config/database.php');
             <td>lastName</td>
             <td>E-mail</td>
             <td>status</td>
+            <td>photo</td>
             <td>...</td>
         </tr>
         <?php
@@ -36,17 +37,18 @@ $sql = "
             exit;
         }
         while($row=pg_fetch_assoc($res)){
-          echo"  <tr>";
+          echo" <tr>";
           echo" <td>".$row ['firstname']."</td>";
           echo" <td>".$row ['lastname']."</td>";
-          echo"  <td>".$row ['email']."</td>";
-          echo"<td>".$row ['status']."</td>";
-          echo"<td>";
-          echo"<a href=''><img src ='icons/edicion.png' width ='20'></a>";
-          echo"<a href=''><img src ='icons/bote-de-basura-mas.png' width ='20'></a>";
-          echo"<a href=''><img src ='icons/vaso.png' width= '20' > </a>";
-          echo"</td>";
-          echo"</tr> ";
+          echo" <td>".$row ['email']."</td>";
+          echo" <td>".$row ['status']."</td>";
+          echo" <td alling='center'><img src = 'photo_users/masculino.png' width=40></td>";
+          echo" <td>";
+          echo" <a href=''><img src ='icons/edicion.png' width ='20'></a>";
+          echo" <a href=''><img src ='icons/bote-de-basura-mas.png' width ='20'></a>";
+          echo" <a href='http://localhost/schoolar/src/delte.php'><img src ='icons/vaso.png' width= '20' > </a>";
+          echo" </td>";
+          echo" </tr> ";
         }
         ?>
 </table>
